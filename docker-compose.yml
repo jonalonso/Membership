@@ -1,0 +1,37 @@
+version: '3.1'
+
+services:
+  db:
+    hostname: membership
+    container_name: membership
+    image: postgres:14
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    environment:
+      POSTGRES_USER: 'user1'
+      POSTGRES_PASSWORD: 'user1'
+      POSTGRES_DB: 'membership'
+    volumes:
+      - base_db_volume:/var/lib/postgresql/data
+      - ./docker/:/docker-entrypoint-initdb.d/
+    networks:
+      - local-backend
+    labels:
+      app: 'base'
+      env: '${ENV:-local}'
+      project: 'membership'
+      service: 'db'
+networks:
+  local-backend:
+    name: base-network
+volumes:
+  base_db_volume:
+    labels:
+      app: 'base'
+      env: '${ENV:-local}'
+      project: 'membership'
+      service: 'db'
+
