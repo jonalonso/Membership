@@ -1,4 +1,5 @@
 import { Context, Next } from 'koa';
+import httpStatus from '../../consts/httpStatusCodes';
 import { User } from '../../database/entities/User';
 import { BaseController } from '../base.controller';
 
@@ -16,7 +17,20 @@ export class UserController extends BaseController {
     }
 
     async addUser(ctx: Context, next: Next) {
-        console.log("🚀 ~ file: user.controller.ts:19 ~ UserController ~ addUser ~ ctx", ctx.request.body)
+        let name:string = ctx.request.body.name;
+        let nameArray:string[] = name.split(" ");
+        if(nameArray.length<2){
+            ctx.status = httpStatus.BAD_REQUEST;
+            ctx.response.body = "2 names required"
+            return;
+        }else{
+            if(nameArray.some((element:string)=>element.length<4)){
+                ctx.status = httpStatus.BAD_REQUEST;
+                ctx.response.body = "each name must have at least 4 characters"
+                return;
+            }
+        }
+
         return super.insert(ctx,next,User);
         
     }
