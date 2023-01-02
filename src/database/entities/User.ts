@@ -4,6 +4,7 @@ import {
   Column,
   Check,
 } from "typeorm";
+import { ColumnNumericTransformer } from "../../utils/ColumnNumericTransformer";
 
 @Entity()
 @Check(
@@ -25,6 +26,6 @@ export class User {
   @Column({ type: "timestamp without time zone",nullable: false, name:'suscription_date' })
   suscriptionDate: Date;
 
-  @Column({ type: "numeric", default: null })
+  @Column({ type: "numeric", default: null,transformer: new ColumnNumericTransformer(), })
   cost: number;
 }
