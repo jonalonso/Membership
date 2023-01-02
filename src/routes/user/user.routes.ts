@@ -7,21 +7,21 @@ const controller = new UserController();
 
 const router = new Router();
 
-router.get("/by", authorized([]),validate(updatePriceSchema), controller.getPriceBy);
-router.get("/", authorized([]), controller.getPrice);
+router.get("/by", authorized([]),validate(updatePriceSchema), controller.getUserBy);
+router.get("/", authorized([]), controller.getUser);
 
 router.post(
   "/",
   authorized([]),
   validate(createPriceSchema),
-  controller.addPrice
+  controller.addUser
 );
 router.put(
   "/",
   authorized([]),
   validate(updatePriceSchema),
-  controller.updatePrice
+  controller.updateUser
 );
-router.delete("/", authorized([]), controller.deletePrice);
+router.delete("/", authorized([]), controller.deleteUser);
 
 export default router.routes();

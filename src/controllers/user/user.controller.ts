@@ -7,24 +7,25 @@ export class UserController extends BaseController {
         super();
     }
 
-    async getPrice(ctx:Context, next: Next) {
+    async getUser(ctx:Context, next: Next) {
         return super.getAll(ctx,next,User);
     }
 
-    async getPriceBy(ctx:Context, next: Next) {
+    async getUserBy(ctx:Context, next: Next) {
         return super.getBy(ctx,next,User)
     }
 
-    async addPrice(ctx: Context, next: Next) {
+    async addUser(ctx: Context, next: Next) {
+        console.log("🚀 ~ file: user.controller.ts:19 ~ UserController ~ addUser ~ ctx", ctx.request.body)
         return super.insert(ctx,next,User);
         
     }
 
-    async updatePrice(ctx: Context, next: Next) {
+    async updateUser(ctx: Context, next: Next) {
         return super.update(ctx,next,User);
     }
 
-    async deletePrice(ctx: Context, next: Next) {
+    async deleteUser(ctx: Context, next: Next) {
         return super.delete(ctx,next,User);
     }
 }

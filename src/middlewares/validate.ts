@@ -14,6 +14,7 @@ export const validate =
         context: undefined,
       });
     } catch (err:any) {
+      console.log("🚀 ~ file: validate.ts:17 ~ err", err)
       throw ApiError.invalidRequest("Invalid request", err.details || err.message);
     }
 
