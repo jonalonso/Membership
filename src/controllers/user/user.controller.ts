@@ -47,6 +47,12 @@ export class UserController extends BaseController {
             return;  
         }
 
+        if((Math.floor((suscriptionDate.getTime()-birthDate.getTime())/31556952000))!==age){
+            ctx.status = httpStatus.BAD_REQUEST;
+            ctx.response.body = "age based on brithdate is different from age declared"
+            return;  
+        }
+
         return super.insert(ctx,next,User);
         
     }
