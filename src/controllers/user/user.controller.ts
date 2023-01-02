@@ -53,11 +53,20 @@ export class UserController extends BaseController {
             return;  
         }
 
+        let calcCost = (Math.floor((new Date().getTime()-suscriptionDate.getTime())/31556952000));
+        let cost:number =  ctx.request.body.cost;
+        if(cost !== calcCost * 100){
+            ctx.status = httpStatus.BAD_REQUEST;
+            ctx.response.body = "cost based on suscriptionDate is different from cost declared"
+            return;   
+        }
+
         return super.insert(ctx,next,User);
         
     }
 
     async updateUser(ctx: Context, next: Next) {
+        //Todo create a fuction using validations used on insert, to use it here without duplicating code
         return super.update(ctx,next,User);
     }
 
