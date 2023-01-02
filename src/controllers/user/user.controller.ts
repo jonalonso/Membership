@@ -31,6 +31,22 @@ export class UserController extends BaseController {
             }
         }
 
+        let birthDate:Date =  ctx.request.body.birthDate;
+        let suscriptionDate:Date =  ctx.request.body.suscriptionDate;
+
+        if(suscriptionDate <= birthDate){
+            ctx.status = httpStatus.BAD_REQUEST;
+            ctx.response.body = "birthdate date cannot be bigger than suscriptionDate"
+            return;
+        }
+
+        let age:number =  ctx.request.body.age;
+        if(age < 18){
+            ctx.status = httpStatus.BAD_REQUEST;
+            ctx.response.body = "suscription only available for people over 18 years old"
+            return;  
+        }
+
         return super.insert(ctx,next,User);
         
     }
